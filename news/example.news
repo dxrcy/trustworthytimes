@@ -1,0 +1,73 @@
+# headline here
+
+## title here
+
+@author Author here
+@date   Date here
+@topic  Main | Secondary | Topic
+
+@image  https://imagelink.com
+@alt    Some image
+
+@tags   randomTag | bruh
+
+no other content here is included in the body
+until the hr
+
+this is custom key examples:
+@secret lol
+@small  font-size: 50%
+
+---
+
+body here
+this is *italic*
+this is ^bold^
+this is _underline_
+this is ~strikethrough~
+this is NOT \*italic\*, NOT \^bold\^, this: \\ << is escaped
+
+this article was written by @author, and the secret is '@secret'
+
+line break above
+hr below
+
+---
+
+- unordered
+- list
+
+1. ordered
+2. list
+- ordered
+3. unordered
+
+~~~ this is a comment
+
+[link | https://google.com]
+
+~~~ soon : {custom styles | color: red}
+~~~ soon : {[style+link | https://google.com] | color: red}
+
+> quotes here
+
+> multi
+> line
+> quote
+
+# Header
+## Subheader
+### Third
+#### Fourth
+content
+
+here is `some code`
+
+~~~ {small text w preset | @small}
+
+~~~ {
+~~~   this is all bold,
+~~~   {
+~~~     and this is red, *this is italic*, ^this is bold^
+~~~   | color: red}
+~~~ | font-weight: 600}

@@ -1,7 +1,6 @@
-use std::fs;
+use newsmarkdown::{compile_articles, create_index};
 
 fn main() {
-  let file = fs::read_to_string("./example.news").expect("Could not read file");
-  let output = newsmarkdown::format(&file);
-  fs::write("./example.html", output).expect("Could not write file");
+  let articles = compile_articles("./news", "./build/news");
+  create_index(&articles);
 }
