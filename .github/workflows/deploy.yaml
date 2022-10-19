@@ -9,23 +9,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Install tools
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: wasm32-unknown-unknown
-
-      - name: Install trunk
-        uses: jetli/trunk-action@v0.1.0
-      - name: Install wasm-bindgen
-        uses: jetli/wasm-bindgen-action@v0.1.0
-
       - name: Checkout
         uses: actions/checkout@v2
 
-      # public-url must be repo name
       - name: Build
-        run: trunk build --release --public-url news
+        run: cargo run
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
