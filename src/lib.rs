@@ -17,22 +17,20 @@ pub fn compile_articles(dir_in: &str, dir_out: &str) -> Vec<Article> {
   let files = fs::read_dir(dir_in).expect("Could not read input directory");
 
   // Loop through input directory files
-  for file in files {
-    if let Ok(file) = file {
-      // Read input file
-      let contents = fs::read_to_string(file.path()).expect("Could not read input file");
-      // Get id (filename without extension) from file path
-      let id = get_file_name(&file).expect("Could not read name of input file");
-      // Compile file contents to article
-      let article = Article::from(&id, &contents);
+  for file in files.flatten() {
+    // Read input file
+    let contents = fs::read_to_string(file.path()).expect("Could not read input file");
+    // Get id (filename without extension) from file path
+    let id = get_file_name(&file).expect("Could not read name of input file");
+    // Compile file contents to article
+    let article = Article::from(&id, &contents);
 
-      // Write file to corresponding output directory
-      fs::write(format!("{dir_out}/{id}.html",), &article.body)
-        .expect("Could not write to build file");
+    // Write file to corresponding output directory
+    fs::write(format!("{dir_out}/{id}.html",), &article.body)
+      .expect("Could not write to build file");
 
-      // Push to articles vector
-      articles.push(article);
-    }
+    // Push to articles vector
+    articles.push(article);
   }
 
   articles
@@ -44,11 +42,11 @@ fn get_file_name(path: &fs::DirEntry) -> Option<String> {
     path
       .path()
       .to_str()?
-      .replace("\\", "/")
-      .split("/")
+      .replace('\\', "/")
+      .split('/')
       .last()?
-      .split(".")
-      .nth(0)?
+      .split('.')
+      .next()?
       .to_owned(),
   )
 }
@@ -62,8 +60,8 @@ pub fn create_index(articles: &Vec<Article>) {
 
     // Article values
     let id = article.id;
-    let headline = article.headline.unwrap_or("[headline]".to_string());
-    let title = article.title.unwrap_or("[title]".to_string());
+    let headline = article.headline.unwrap_or_else(|| "[headline]".to_string());
+    let title = article.title.unwrap_or_else(|| "[title]".to_string());
 
     //TODO Remove .html in production
     index.push(format!(

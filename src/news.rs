@@ -19,29 +19,23 @@ pub struct Article {
 impl Article {
   /// Get key of hashmap as Option<String>
   fn hashmap_key(hm: &HashMap<String, String>, key: &str) -> Option<String> {
-    match hm.get(key) {
-      Some(s) => Some(s.to_owned()),
-      None => None,
-    }
+    hm.get(key).map(|s| s.to_owned())
   }
 
   /// Build meta struct from hashmap
   fn build(id: &str, body: &str, meta: &HashMap<String, String>) -> Self {
     // Optional vector
-    let topic = match Self::hashmap_key(&meta, "topic") {
-      Some(s) => Some(
-        s.split("|")
-          .collect::<Vec<_>>()
-          .iter()
-          .map(|x| x.trim().to_string())
-          .collect(),
-      ),
-      None => None,
-    };
+    let topic = Self::hashmap_key(meta, "topic").map(|s| {
+      s.split('|')
+        .collect::<Vec<_>>()
+        .iter()
+        .map(|x| x.trim().to_string())
+        .collect()
+    });
     // Vector
-    let tags = match Self::hashmap_key(&meta, "tags") {
+    let tags = match Self::hashmap_key(meta, "tags") {
       Some(s) => s
-        .split("|")
+        .split('|')
         .collect::<Vec<_>>()
         .iter()
         .map(|x| x.trim().to_string())
@@ -51,13 +45,13 @@ impl Article {
 
     Article {
       id: id.to_string(),
-      headline: Self::hashmap_key(&meta, "headline"),
-      title: Self::hashmap_key(&meta, "title"),
-      author: Self::hashmap_key(&meta, "author"),
-      date: Self::hashmap_key(&meta, "date"),
+      headline: Self::hashmap_key(meta, "headline"),
+      title: Self::hashmap_key(meta, "title"),
+      author: Self::hashmap_key(meta, "author"),
+      date: Self::hashmap_key(meta, "date"),
       topic,
-      image: Self::hashmap_key(&meta, "image"),
-      alt: Self::hashmap_key(&meta, "alt"),
+      image: Self::hashmap_key(meta, "image"),
+      alt: Self::hashmap_key(meta, "alt"),
       tags,
       body: body.to_string(),
     }
@@ -68,14 +62,14 @@ impl Article {
   //TODO Add custom style support
   pub fn from(id: &str, input: &str) -> Article {
     // Parse news to raw body and meta
-    let (mut body, meta) = parse_news(&input);
+    let (mut body, meta) = parse_news(input);
 
     // Filter body
     body = include_meta(&body, &meta);
     body = format_primatives(&body);
     body = init_links(&body);
 
-    Article::build(&id, &body, &meta)
+    Article::build(id, &body, &meta)
   }
 }
 
@@ -83,12 +77,13 @@ impl Article {
 fn include_meta(body: &str, meta: &HashMap<String, String>) -> String {
   let mut body = body.to_string();
   for (key, value) in meta {
-    body = body.replace(&format!("@{key}"), &value);
+    body = body.replace(&format!("@{key}"), value);
   }
   body
 }
 
 /// Create and format links of body
+#[allow(clippy::format_push_string)]
 fn init_links(body: &str) -> String {
   let mut output = String::new();
   // Current building link
@@ -99,8 +94,8 @@ fn init_links(body: &str) -> String {
     if let Some(content) = &mut link {
       // Close link
       if ch == ']' {
-        let split = content.split("|").collect::<Vec<&str>>();
-        if let Some(title) = split.get(0) {
+        let split = content.split('|').collect::<Vec<&str>>();
+        if let Some(title) = split.first() {
           let href = split.get(1).unwrap_or(&"#");
           output += &format!("<a href={href}> {title} </a>");
         }
@@ -291,7 +286,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
         // Normal line
         _ => {
           let s = line.trim();
-          if s.len() > 0 {
+          if !s.is_empty() {
             Some(format!("<p> {s} </p>\n"))
           } else {
             None
