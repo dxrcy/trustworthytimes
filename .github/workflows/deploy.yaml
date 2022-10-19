@@ -7,6 +7,10 @@ on:
 
 jobs:
   release:
+    defaults:
+    run:
+      working-directory: news
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
