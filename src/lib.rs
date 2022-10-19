@@ -8,14 +8,14 @@ use std::{fs, path::Path};
 pub fn compile_articles(dir_in: &str, dir_out: &str) -> Vec<Article> {
   let mut articles = Vec::<Article>::new();
 
-  // Read input directory
-  let files = fs::read_dir(dir_in).expect("Could not read input directory");
-
   // Create build directory
   println!("{dir_out}");
   if !Path::new(dir_out).exists() {
     fs::create_dir(dir_out).expect("Could not create output directory");
   }
+
+  // Read input directory
+  let files = fs::read_dir(dir_in).expect("Could not read input directory");
 
   // Loop through input directory files
   for file in files.flatten() {
