@@ -8,13 +8,14 @@ use std::{fs, path::Path};
 pub fn compile_articles(dir_in: &str, dir_out: &str) -> Vec<Article> {
   let mut articles = Vec::<Article>::new();
 
+  // Read input directory
+  let files = fs::read_dir(dir_in).expect("Could not read input directory");
+
   // Create build directory
+  println!("{dir_out}");
   if !Path::new(dir_out).exists() {
     fs::create_dir(dir_out).expect("Could not create output directory");
   }
-
-  // Read input directory
-  let files = fs::read_dir(dir_in).expect("Could not read input directory");
 
   // Loop through input directory files
   for file in files.flatten() {
@@ -52,7 +53,7 @@ fn get_file_name(path: &fs::DirEntry) -> Option<String> {
 }
 
 /// Create index file for build
-pub fn create_index(articles: &Vec<Article>) {
+pub fn create_index(path: &str, other: &str, articles: &Vec<Article>) {
   let mut index = Vec::<String>::new();
 
   for article in articles {
@@ -65,10 +66,9 @@ pub fn create_index(articles: &Vec<Article>) {
 
     //TODO Remove .html in production
     index.push(format!(
-      r#"<a href="./news/{id}.html"> {headline} <br/> {title} </a> <hr>"#,
+      r#"<a href="{other}/{id}.html"> {headline} <br/> {title} </a> <hr>"#,
     ));
   }
 
-  fs::write("./build/index.html", index.join("\n\n<br /><hr>\n\n"))
-    .expect("Could not write to index file");
+  fs::write(path, index.join("\n\n<br /><hr>\n\n")).expect("Could not write to index file");
 }
