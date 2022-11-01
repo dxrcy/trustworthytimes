@@ -1,0 +1,40 @@
+{{#> boilerplate }}
+
+{{>header}}
+
+<h1>
+  this is the index!
+</h1>
+
+blah blah
+
+content:
+
+<div>
+  {{#each articles}}
+  {{#with this}}
+  {{!TODO Remove .html for prod }}
+  <a href="news/{{id}}.html">
+    <h2>
+      {{#if headline}}
+      {{headline}}
+      {{else}}
+      [no headline]
+      {{/if}}
+      ({{id}})
+    </h2>
+
+    <p>
+      {{#if title}}
+      {{title}}
+      {{else}}
+      [no title]
+      {{/if}}
+    </p>
+    <hr />
+  </a>
+  {{/with}}
+  {{/each}}
+</div>
+
+{{/boilerplate}}

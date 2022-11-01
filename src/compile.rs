@@ -2,9 +2,13 @@ use handlebars::Handlebars;
 use serde_json::json;
 
 use crate::news::Article;
-use std::{error::Error, fs, path::Path};
+use std::{collections::HashMap, error::Error, fs, path::Path};
 
-pub fn compile_articles(dir_in: &str, dir_out: &str) -> Result<Vec<Article>, Box<dyn Error>> {
+pub fn compile_articles(
+  partials: &HashMap<String, String>,
+  dir_in: &str,
+  dir_out: &str,
+) -> Result<Vec<Article>, Box<dyn Error>> {
   let mut articles = Vec::<Article>::new();
 
   // Create build directory
@@ -25,8 +29,11 @@ pub fn compile_articles(dir_in: &str, dir_out: &str) -> Result<Vec<Article>, Box
     let article = Article::from(&id, &contents);
 
     // Format with handlebars
-    let output = Handlebars::new()
-      .render_template(&fs::read_to_string("./template/article.hbs")?, &article)?;
+    let mut reg = Handlebars::new();
+    for (k, v) in partials {
+      reg.register_partial(k, v)?;
+    }
+    let output = reg.render_template(&fs::read_to_string("./templates/article.hbs")?, &article)?;
 
     // Write file to corresponding build directory
     create_build_dir();
@@ -41,16 +48,21 @@ pub fn compile_articles(dir_in: &str, dir_out: &str) -> Result<Vec<Article>, Box
 
 /// Create index file for build
 pub fn create_index(
+  partials: &HashMap<String, String>,
   _path: &str,
   _other: &str,
   articles: &Vec<Article>,
 ) -> Result<(), Box<dyn Error>> {
   let mut reg = Handlebars::new();
-  reg.register_template_string("index", fs::read_to_string("./template/index.hbs")?)?;
+  reg.register_template_string("index", fs::read_to_string("./templates/index.hbs")?)?;
 
   // Format with handlebars
-  let output = Handlebars::new().render_template(
-    &fs::read_to_string("./template/index.hbs")?,
+  let mut reg = Handlebars::new();
+  for (k, v) in partials {
+    reg.register_partial(k, v)?;
+  }
+  let output = reg.render_template(
+    &fs::read_to_string("./templates/index.hbs")?,
     &json!({ "articles": articles }),
   )?;
 
@@ -59,6 +71,29 @@ pub fn create_index(
   fs::write("./build/index.html", output)?;
 
   Ok(())
+}
+
+/// Read all templates and partials from template directory
+pub fn get_partials() -> Result<HashMap<String, String>, Box<dyn Error>> {
+  let mut partials = HashMap::<String, String>::new();
+
+  // Add default partials
+  //TODO move to const variable
+  partials.insert(
+    "url".to_string(),
+    "https://github.com/darccyy/news".to_string(),
+  );
+
+  // Read template directory
+  let files = fs::read_dir("./templates/partials")?;
+
+  for file in files.flatten() {
+    if let Some(name) = get_file_name(&file) {
+      partials.insert(name, fs::read_to_string(file.path())?);
+    }
+  }
+
+  Ok(partials)
 }
 
 /// Convert DirEntry to string and get file name
