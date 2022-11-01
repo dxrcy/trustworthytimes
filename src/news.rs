@@ -1,8 +1,9 @@
 use regex::Regex;
+use serde::Serialize;
 use std::collections::HashMap;
 
 /// Article metadata and body
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Article {
   pub id: String,
   pub headline: Option<String>,
