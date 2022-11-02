@@ -7,7 +7,7 @@ use std::collections::HashMap;
 pub struct Article {
   pub id: String,
   pub headline: Option<String>,
-  pub title: Option<String>,
+  pub desc: Option<String>,
   pub author: Option<String>,
   pub date: Option<String>,
   pub topic: Option<Vec<String>>, // ? Change to array ?
@@ -47,7 +47,7 @@ impl Article {
     Article {
       id: id.to_string(),
       headline: Self::hashmap_key(meta, "headline"),
-      title: Self::hashmap_key(meta, "title"),
+      desc: Self::hashmap_key(meta, "desc"),
       author: Self::hashmap_key(meta, "author"),
       date: Self::hashmap_key(meta, "date"),
       topic,
@@ -96,9 +96,9 @@ fn init_links(body: &str) -> String {
       // Close link
       if ch == ']' {
         let split = content.split('|').collect::<Vec<&str>>();
-        if let Some(title) = split.first() {
+        if let Some(desc) = split.first() {
           let href = split.get(1).unwrap_or(&"#");
-          output += &format!("<a href={href}> {title} </a>");
+          output += &format!("<a href={href}> {desc} </a>");
         }
         link = None;
       } else {
@@ -227,7 +227,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
           meta.insert("headline".to_string(), rest.to_string());
         }
         "##" => {
-          meta.insert("title".to_string(), rest.to_string());
+          meta.insert("desc".to_string(), rest.to_string());
         }
         "---" => is_meta = false,
         _ => (),

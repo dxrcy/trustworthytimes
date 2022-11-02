@@ -2,34 +2,29 @@
 
 {{>header}}
 
-<h1>
-  this is the index!
-</h1>
-
-blah blah
-
-content:
-
 <div>
   {{#each articles}}
   {{#with this}}
   <a href="news/{{id}}">
-    <h2>
+    <h2 class="headline">
       {{#if headline}}
       {{headline}}
       {{else}}
-      [no headline]
+      <span class="missing">
+        [no headline]
+      </span>
       {{/if}}
-      ({{id}})
     </h2>
 
-    <p>
-      {{#if title}}
-      {{title}}
+    <h3 class="desc">
+      {{#if desc}}
+      {{desc}}
       {{else}}
-      [no title]
+      <span class="missing">
+        [no desc]
+      </span>
       {{/if}}
-    </p>
+    </h3>
     <hr />
   </a>
   {{/with}}

@@ -1,19 +1,46 @@
-{{#> boilerplate title=headline desc=title}}
+{{#> boilerplate title=headline desc}}
 
 {{>header}}
 
-<h1>
-  Headline: {{headline}}
-</h1>
+<section class="meta">
+  <div class="topic">
+    {{#each topic}}
+    <span>
+      {{this}}
+    </span>
+    {{/each}}
+  </div>
 
-<h2>
-  {{title}}
-</h2>
+  <h1 class="headline">
+    {{#if headline}}
+    {{headline}}
+    {{else}}
+    <span class="missing">
+      [no headline]
+    </span>
+    {{/if}}
+  </h1>
 
-content:
+  <h2 class="stats">
+    {{!--TODO Add icons --}}
+    - <span class="author"> {{#if author}}{{author}}{{/if}}</span>
+    - <span class="date"> {{#if date}}{{date}}{{/if}}</span>
+    - <span class="topic"> {{#each topic}}{{#if @last}}{{this}}{{/if}}{{/each}}</span>
+  </h2>
+</section>
 
-<div>
+<section class="image">
+  {{#if image}}
+  <img href={{image}} alt="{{#if alt}}{{alt}}{{else}}Some image{{/if}}" />
+  {{/if}}
+</section>
+
+<section class="content">
+  {{#if body}}
   {{{body}}}
-</div>
+  {{else}}
+  <span class="missing">Nothing here!</span>
+  {{/if}}
+</section>
 
 {{/boilerplate}}
