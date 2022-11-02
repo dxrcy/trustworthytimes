@@ -7,7 +7,7 @@ pub use statics::*;
 use serde_json::Value;
 use std::fs;
 
-/// Convert DirEntry to string and get file name
+/// Convert `DirEntry` to string and get file name without extension
 pub fn get_file_name(path: &fs::DirEntry) -> Option<String> {
   Some(
     path
@@ -22,7 +22,7 @@ pub fn get_file_name(path: &fs::DirEntry) -> Option<String> {
   )
 }
 
-/// Merge `serde_json` value with another
+/// Merge one `serde_json` value with another
 fn merge_json(a: &mut Value, b: Value) {
   if let Value::Object(a) = a {
     if let Value::Object(b) = b {

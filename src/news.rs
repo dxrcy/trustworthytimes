@@ -187,7 +187,6 @@ fn format_primatives(body: &str) -> String {
 }
 
 /// Separate body and parse metadata of input string, add line styles
-// ? Change hashmap to <&str, &str> ?
 fn parse_news(input: &str) -> (String, HashMap<String, String>) {
   // Type of html list building
   enum ListType {

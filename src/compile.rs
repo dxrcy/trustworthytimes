@@ -9,46 +9,49 @@ use crate::{get_file_name, merge_json, DIR_BUILD, DIR_NEWS, IS_DEV, PARTIALS};
 //TODO Use enums or something
 
 /// Create empty build directory if not exists
-pub fn clean_build_dir() {
+///TODO Error handling
+pub fn clean_build_dir() -> Result<(), Box<dyn Error>> {
+  // Delete old folder if exists
   if Path::new(DIR_BUILD).exists() {
     fs::remove_dir_all(DIR_BUILD).expect("Could not remove build directory");
   }
+  // Create root build folder
   fs::create_dir(DIR_BUILD).expect("Could not create build directory");
+  // Create news subfolder
   fs::create_dir(format!("./{DIR_BUILD}/news")).expect("Could not create build news directory");
+  Ok(())
 }
 
-///TODO Comment here
+/// Compile all articles in a directory to a Vector
+///TODO Error handling
 pub fn compile_articles() -> Result<Vec<Article>, Box<dyn Error>> {
-  let mut articles = Vec::<Article>::new();
-
-  // Read input directory
-  let files = fs::read_dir(DIR_NEWS).expect("Could not read input directory");
-  // Loop through input directory files
-  for file in files.flatten() {
-    // Read input file
-    let contents = fs::read_to_string(file.path()).expect("Could not read input file");
-    // Get id (filename without extension) from file path
-    let id = get_file_name(&file).expect("Could not read name of input file");
-    // Compile file contents to article
-    let article = Article::from(&id, &contents);
-
-    // Push to articles vector
-    articles.push(article);
-  }
-
-  Ok(articles)
+  Ok(
+    // Loop through input directory files
+    fs::read_dir(DIR_NEWS)
+      .expect("Could not read input directory")
+      .flatten()
+      .map(|file| {
+        // Compile file contents to article and push to vector
+        Article::from(
+          // Get id (filename without extension) from file path
+          &get_file_name(&file).expect("Could not read name of input file"),
+          // Read input file
+          &fs::read_to_string(file.path()).expect("Could not read input file"),
+        )
+      })
+      .collect(),
+  )
 }
 
-///TODO Comment here
+/// Fill `article.hbs` template for each article, write html file in news folder in build directory
+///TODO Error handling
 pub fn render_articles(articles: &Vec<Article>) -> Result<(), Box<dyn Error>> {
   for article in articles {
-    // Render from template
-    let render = render_template("article", json!(article))?;
-
-    // Write file to corresponding build directory
+    // Write file to corresponding file in news folder in build directory
     fs::write(
       format!("./{DIR_BUILD}/news/{id}.html", id = article.id),
-      render,
+      // Render from template
+      render_template("article", json!(article))?,
     )
     .expect("Could not write article file");
   }
@@ -56,33 +59,39 @@ pub fn render_articles(articles: &Vec<Article>) -> Result<(), Box<dyn Error>> {
   Ok(())
 }
 
-///TODO Comment here
+/// Fill `index.hbs` template with all articles, write html file in build directory
+///TODO Error handling
 pub fn render_index(articles: &Vec<Article>) -> Result<(), Box<dyn Error>> {
-  // Render from template
-  let render = render_template("index", json!({ "articles": articles }))?;
   // Write to index file in build directory
-  fs::write(format!("./{DIR_BUILD}/index.html"), render).expect("Could not create index file");
+  fs::write(
+    format!("./{DIR_BUILD}/index.html"),
+    // Render from template
+    render_template("index", json!({ "articles": articles }))?,
+  )
+  .expect("Could not create index file");
 
   Ok(())
 }
 
 /// Render template from file, return rendered string
+///TODO Error handling
 fn render_template(name: &str, json: serde_json::Value) -> Result<String, Box<dyn Error>> {
-  // Format with handlebars
   let mut reg = Handlebars::new();
 
+  // Register all partials from static hashmap
   for (k, v) in PARTIALS.iter() {
     reg.register_partial(k, v)?;
   }
 
+  // Merge json with custom templates
   // ? Convert to `.clone()` ?
+  //TODO Move second json object to static variable
   let mut json = json;
   merge_json(&mut json, json!({ "IS_DEV": *IS_DEV }));
 
-  let render = reg.render_template(
+  // Render template as string
+  Ok(reg.render_template(
     &fs::read_to_string(format!("./templates/{name}.hbs")).expect("Could not read template"),
     &json,
-  )?;
-
-  Ok(render)
+  )?)
 }
