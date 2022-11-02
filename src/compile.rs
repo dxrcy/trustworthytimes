@@ -6,7 +6,7 @@ use std::{collections::HashMap, error::Error, fs, path::Path};
 
 //TODO ERROR HANDLING!!!
 
-pub const BASE_URL: &str = "https://darccyy.github.io/news/";
+pub const BASE_URL: &str = "https://trustworthytimes.github.io/";
 pub const DIR_BUILD: &str = "./docs/";
 
 /// Create output directory
