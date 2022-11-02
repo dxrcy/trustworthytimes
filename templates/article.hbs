@@ -1,11 +1,13 @@
-{{#> boilerplate title=headline desc}}
+{{#> boilerplate title=headline desc=desc}}
 
 {{>header}}
 
 <section class="meta">
   <div class="topic">
     {{#each topic}}
+    {{!--TODO Change to ::before when css --}}
     <span>
+      /
       {{this}}
     </span>
     {{/each}}
@@ -23,9 +25,12 @@
 
   <h2 class="stats">
     {{!--TODO Add icons --}}
-    - <span class="author"> {{#if author}}{{author}}{{/if}}</span>
-    - <span class="date"> {{#if date}}{{date}}{{/if}}</span>
-    - <span class="topic"> {{#each topic}}{{#if @last}}{{this}}{{/if}}{{/each}}</span>
+    - <span class="author"> {{#if author}}{{author}}{{else}}<span class="missing">Unknown Author</span>{{/if}}</span>
+    - <span class="date"> {{#if date}}{{date}}{{else}}<span class="missing">Unknown Date</span>{{/if}}</span>
+    - <span class="topic">
+      {{#if topic}}{{#each topic}}{{#if @last}}{{this}}{{/if}}{{/each}}{{else}}<span class="missing">Unknown
+        Topic</span>{{/if}}
+    </span>
   </h2>
 </section>
 
