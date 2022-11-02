@@ -136,42 +136,45 @@ fn format_primatives(body: &str) -> String {
   let mut is_escaped = false;
 
   for ch in body.chars() {
-    // ? Move `!escaped` match guards to if statement ?
-    match ch {
-      // Non-escaped slash
-      '\\' if !is_escaped => (),
+    if is_escaped {
+      output.push(ch);
+    } else {
+      match ch {
+        // Non-escaped slash
+        '\\' => (),
 
-      // Italic
-      '*' if !is_escaped => {
-        output.push_str(if prims.italic { "</i>" } else { "<i>" });
-        prims.italic = !prims.italic;
-      }
+        // Italic
+        '*' => {
+          output.push_str(if prims.italic { "</i>" } else { "<i>" });
+          prims.italic = !prims.italic;
+        }
 
-      // Bold
-      '^' if !is_escaped => {
-        output.push_str(if prims.bold { "</b>" } else { "<b>" });
-        prims.bold = !prims.bold;
-      }
+        // Bold
+        '^' => {
+          output.push_str(if prims.bold { "</b>" } else { "<b>" });
+          prims.bold = !prims.bold;
+        }
 
-      // Underline
-      '_' if !is_escaped => {
-        output.push_str(if prims.underline { "</u>" } else { "<u>" });
-        prims.underline = !prims.underline;
-      }
+        // Underline
+        '_' => {
+          output.push_str(if prims.underline { "</u>" } else { "<u>" });
+          prims.underline = !prims.underline;
+        }
 
-      // Strike
-      '~' if !is_escaped => {
-        output.push_str(if prims.strike {
-          "</strike>"
-        } else {
-          "<strike>"
-        });
-        prims.strike = !prims.strike;
-      }
+        // Strike
+        '~' => {
+          output.push_str(if prims.strike {
+            "</strike>"
+          } else {
+            "<strike>"
+          });
+          prims.strike = !prims.strike;
+        }
 
-      // Other
-      _ => {
-        output.push(ch);
+        // Other
+        _ => {
+          output.push(ch);
+        }
       }
     }
 
