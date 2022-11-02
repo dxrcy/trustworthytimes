@@ -40,3 +40,9 @@ fn merge_json(a: &mut Value, b: Value) {
 
   *a = b;
 }
+
+/// Escape html symbols
+/// Does not include backtick!
+pub fn escape_html(string: &str) -> String {
+  handlebars::html_escape(string).replace("&#x60;", "`")
+}

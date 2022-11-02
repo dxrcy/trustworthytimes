@@ -26,7 +26,7 @@ this is ^bold^
 this is _underline_
 this is ~strikethrough~
 this is NOT \*italic\*, NOT \^bold\^, this: \\ << is escaped
-here is `some code`
+here is `some code` and `more`
 
 *multi
 line

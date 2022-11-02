@@ -1,7 +1,8 @@
-use handlebars::html_escape;
 use regex::Regex;
 use serde::Serialize;
 use std::collections::HashMap;
+
+use crate::escape_html;
 
 /// Article metadata and body, with id
 #[derive(Debug, Clone, Serialize)]
@@ -258,11 +259,11 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
       let maybe_push = match token {
         // Header
         c if Regex::new(r"^#+$").unwrap().is_match(c) => {
-          Some(format!("<h{d}> {} </h{d}>", html_escape(rest), d = c.len(),))
+          Some(format!("<h{d}> {} </h{d}>", escape_html(rest), d = c.len(),))
         }
 
         // Quote
-        ">" => Some(format!("<blockquote> {} </blockquote>", html_escape(rest))),
+        ">" => Some(format!("<blockquote> {} </blockquote>", escape_html(rest))),
 
         // Hr
         "---" => Some("<hr />".to_string()),
@@ -277,7 +278,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
           };
           active_list = Ordered;
 
-          Some(format!("{parent}<li> {} </li>", html_escape(rest)))
+          Some(format!("{parent}<li> {} </li>", escape_html(rest)))
         }
 
         // Ordered list
@@ -290,7 +291,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
           };
           active_list = Unordered;
 
-          Some(format!("{parent}<li> {} </li>", html_escape(rest)))
+          Some(format!("{parent}<li> {} </li>", escape_html(rest)))
         }
 
         // Comment
@@ -299,7 +300,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
         _ => {
           let s = line.trim();
           if !s.is_empty() {
-            Some(format!("<p> {} </p>\n", html_escape(s)))
+            Some(format!("<p> {} </p>\n", escape_html(s)))
           } else {
             None
           }
