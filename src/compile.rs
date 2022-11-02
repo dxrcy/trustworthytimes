@@ -6,7 +6,8 @@ use std::{collections::HashMap, error::Error, fs, path::Path};
 
 //TODO ERROR HANDLING!!!
 
-pub const DIR_BUILD: &str = "./docs";
+pub const BASE_URL: &str = "https://darccyy.github.io/news/";
+pub const DIR_BUILD: &str = "./docs/";
 
 /// Create output directory
 /// Create build directory if not exists
@@ -15,7 +16,7 @@ pub fn create_build_dir() {
     fs::remove_dir_all(DIR_BUILD).expect("Could not remove build directory");
   }
   fs::create_dir(DIR_BUILD).expect("Could not create build directory");
-  fs::create_dir(format!("{DIR_BUILD}/news")).expect("Could not create build news directory");
+  fs::create_dir(format!("{DIR_BUILD}news")).expect("Could not create build news directory");
 }
 
 pub fn compile_articles(
@@ -47,7 +48,7 @@ pub fn compile_articles(
     )?;
 
     // Write file to corresponding build directory
-    fs::write(format!("{DIR_BUILD}/news/{id}.html"), output).expect("Could not write article file");
+    fs::write(format!("{DIR_BUILD}news/{id}.html"), output).expect("Could not write article file");
 
     // Push to articles vector
     articles.push(article);
@@ -74,7 +75,7 @@ pub fn create_index(
   )?;
 
   // Write to index file in build directory
-  fs::write(format!("{DIR_BUILD}/index.html"), output).expect("Could not create index file");
+  fs::write(format!("{DIR_BUILD}index.html"), output).expect("Could not create index file");
 
   Ok(())
 }
@@ -85,10 +86,7 @@ pub fn get_partials() -> Result<HashMap<String, String>, Box<dyn Error>> {
 
   // Add default partials
   //TODO move to const variable
-  partials.insert(
-    "url".to_string(),
-    "https://github.com/darccyy/news".to_string(),
-  );
+  partials.insert("url".to_string(), BASE_URL.to_string());
 
   // Read template directory
   let files = fs::read_dir("./templates/partials").expect("Could not read partials directory");
