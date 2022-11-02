@@ -50,7 +50,7 @@ lazy_static! {
     partials.insert(
       "BASE_URL".to_string(),
       if *IS_DEV {
-        format!("file:///{}/index.html", *BASE_URL)
+        format!("file:///{}", *BASE_URL)
       } else {
         BASE_URL.to_string()
       },

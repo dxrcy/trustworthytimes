@@ -17,8 +17,10 @@ pub fn clean_build_dir() -> Result<(), Box<dyn Error>> {
   }
   // Create root build folder
   fs::create_dir(DIR_BUILD).expect("Could not create build directory");
-  // Create news subfolder
+  // Create subfolders
+  // ? Convert to loop ?
   fs::create_dir(format!("./{DIR_BUILD}/news")).expect("Could not create build news directory");
+  fs::create_dir(format!("./{DIR_BUILD}/css")).expect("Could not create build news directory");
   Ok(())
 }
 
@@ -94,4 +96,13 @@ fn render_template(name: &str, json: serde_json::Value) -> Result<String, Box<dy
     &fs::read_to_string(format!("./templates/{name}.hbs")).expect("Could not read template"),
     &json,
   )?)
+}
+
+/// Compile styles from `scss` to `css`
+pub fn compile_styles() -> Result<(), Box<dyn Error>> {
+  //TODO Move path to const
+  let css = grass::from_path("./styles/global.scss", &grass::Options::default())?;
+  fs::write(format!("./{DIR_BUILD}/css/global.css"), css)?;
+
+  Ok(())
 }

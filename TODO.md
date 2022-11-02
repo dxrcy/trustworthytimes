@@ -6,5 +6,5 @@
 - - Syntax something like: `@image[samplename;imagelink;alt]`
 - Add css obviously
 - Add 404 page
-- Minify html files?
+- Minify html/css files?
 - - With `minify-html` crate possibly
