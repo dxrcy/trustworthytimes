@@ -63,6 +63,19 @@ content
 
 here is `some code`
 
+---
+this section tests html escape:
+
+<strong>this text should NOT be bold!</strong>
+
+> <strong>this text should NOT be bold!</strong>
+
+- <strong>this text should NOT be bold!</strong>
+
+1. <strong>this text should NOT be bold!</strong>
+
+---
+
 ~~~ {small text w preset | @small}
 
 ~~~ {

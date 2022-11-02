@@ -1,3 +1,4 @@
+use handlebars::html_escape;
 use regex::Regex;
 use serde::Serialize;
 use std::collections::HashMap;
@@ -59,7 +60,6 @@ impl Article {
   }
 
   /// Format news string to html
-  //TODO Sanitize html chars
   //TODO Add custom style support
   pub fn from(id: &str, input: &str) -> Article {
     // Parse news to raw body and meta
@@ -249,11 +249,11 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
       let maybe_push = match token {
         // Header
         c if Regex::new(r"^#+$").unwrap().is_match(c) => {
-          Some(format!("<h{d}> {rest} </h{d}>", d = c.len()))
+          Some(format!("<h{d}> {} </h{d}>", html_escape(rest), d = c.len(),))
         }
 
         // Quote
-        ">" => Some(format!("<blockquote> {rest} </blockquote>")),
+        ">" => Some(format!("<blockquote> {} </blockquote>", html_escape(rest))),
 
         // Hr
         "---" => Some("<hr />".to_string()),
@@ -268,7 +268,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
           };
           active_list = Ordered;
 
-          Some(format!("{parent}<li> {rest} </li>"))
+          Some(format!("{parent}<li> {} </li>", html_escape(rest)))
         }
 
         // Ordered list
@@ -281,7 +281,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
           };
           active_list = Unordered;
 
-          Some(format!("{parent}<li> {rest} </li>"))
+          Some(format!("{parent}<li> {} </li>", html_escape(rest)))
         }
 
         // Comment
@@ -290,7 +290,7 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
         _ => {
           let s = line.trim();
           if !s.is_empty() {
-            Some(format!("<p> {s} </p>\n"))
+            Some(format!("<p> {} </p>\n", html_escape(s)))
           } else {
             None
           }
