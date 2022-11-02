@@ -6,6 +6,7 @@ use crate::news::Article;
 use crate::{get_file_name, merge_json, DIR_BUILD, DIR_NEWS, IS_DEV, PARTIALS};
 
 //TODO ERROR HANDLING!!!
+//TODO Use enums or something
 
 /// Create empty build directory if not exists
 pub fn clean_build_dir() {
