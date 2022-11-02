@@ -1,20 +1,42 @@
 pub mod compile;
 pub mod news;
 
-use compile::{get_partials, create_build_dir};
+mod statics;
+pub use statics::*;
 
-use crate::compile::{compile_articles, create_index};
-use std::error::Error;
+use serde_json::Value;
+use std::fs;
 
-/// Runs parse and compile functions
-///TODO Rename everything!
-pub fn run() -> Result<(), Box<dyn Error>> {
-  create_build_dir();
+/// Convert DirEntry to string and get file name
+pub fn get_file_name(path: &fs::DirEntry) -> Option<String> {
+  Some(
+    path
+      .path()
+      .to_str()?
+      .replace('\\', "/")
+      .split('/')
+      .last()?
+      .split('.')
+      .next()?
+      .to_owned(),
+  )
+}
 
-  let partials = get_partials()?;
+/// Merge `serde_json` value with another
+fn merge_json(a: &mut Value, b: Value) {
+  if let Value::Object(a) = a {
+    if let Value::Object(b) = b {
+      for (k, v) in b {
+        if v.is_null() {
+          a.remove(&k);
+        } else {
+          merge_json(a.entry(k).or_insert(Value::Null), v);
+        }
+      }
 
-  let articles = compile_articles(&partials, "./news")?;
-  create_index(&partials, "index.html", &articles)?;
+      return;
+    }
+  }
 
-  Ok(())
+  *a = b;
 }

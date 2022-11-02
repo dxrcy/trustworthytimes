@@ -2,7 +2,7 @@ use regex::Regex;
 use serde::Serialize;
 use std::collections::HashMap;
 
-/// Article metadata and body
+/// Article metadata and body, with id
 #[derive(Debug, Clone, Serialize)]
 pub struct Article {
   pub id: String,

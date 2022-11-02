@@ -2,10 +2,19 @@
 
 {{>header}}
 
+{{#if IS_DEV}}
+Development
+{{else}}
+Production
+{{/if}}
+{{#if IS_DEV}}.html{{/if}}
+{{> IF_EXT}}
+{{> IF_FILE}}
+
 <div>
   {{#each articles}}
   {{#with this}}
-  <a href="news/{{id}}">
+  <a href="news/{{id}}{{> IF_EXT}}">
     <h2 class="headline">
       {{#if headline}}
       {{headline}}
