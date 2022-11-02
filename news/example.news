@@ -26,6 +26,16 @@ this is ^bold^
 this is _underline_
 this is ~strikethrough~
 this is NOT \*italic\*, NOT \^bold\^, this: \\ << is escaped
+here is `some code`
+
+*multi
+line
+italics*
+
+`multi
+line
+code` (sorta)
+
 
 this article was written by @author, and the secret is '@secret'
 
@@ -60,8 +70,6 @@ hr below
 ### Third
 #### Fourth
 content
-
-here is `some code`
 
 ---
 this section tests html escape:

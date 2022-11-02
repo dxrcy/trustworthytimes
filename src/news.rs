@@ -124,12 +124,14 @@ fn format_primatives(body: &str) -> String {
     bold: bool,
     underline: bool,
     strike: bool,
+    code: bool,
   }
   let mut prims = Primatives {
     italic: false,
     bold: false,
     underline: false,
     strike: false,
+    code: false,
   };
 
   let mut output = String::new();
@@ -169,6 +171,13 @@ fn format_primatives(body: &str) -> String {
             "<strike>"
           });
           prims.strike = !prims.strike;
+        }
+
+        // Code
+        //TODO Fix??? its not working???
+        '`' => {
+          output.push_str(if prims.code { "</code>" } else { "<code>" });
+          prims.code = !prims.code;
         }
 
         // Other
