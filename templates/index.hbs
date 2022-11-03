@@ -2,7 +2,7 @@
 
 {{>header}}
 
-<div>
+<section class="content articles">
   {{#each articles}}
   {{#with this}}
   <a href="news/{{id}}{{> IF_EXT}}">
@@ -29,6 +29,6 @@
   </a>
   {{/with}}
   {{/each}}
-</div>
+</section>
 
 {{/boilerplate}}

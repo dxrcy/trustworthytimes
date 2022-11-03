@@ -61,16 +61,24 @@ pub fn render_articles(articles: &Vec<Article>) -> Result<(), Box<dyn Error>> {
   Ok(())
 }
 
-/// Fill `index.hbs` template with all articles, write html file in build directory
+/// Fill `index.hbs` and other top-level template with all articles, write html files directly in build directory
 ///TODO Error handling
-pub fn render_index(articles: &Vec<Article>) -> Result<(), Box<dyn Error>> {
-  // Write to index file in build directory
+pub fn render_root_files(articles: &Vec<Article>) -> Result<(), Box<dyn Error>> {
+  // Index (root) file
   fs::write(
     format!("./{DIR_BUILD}/index.html"),
     // Render from template
     render_template("index", json!({ "articles": articles }))?,
   )
   .expect("Could not create index file");
+
+  // 404 page
+  fs::write(
+    format!("./{DIR_BUILD}/404.html"),
+    // Render from template
+    render_template("404", json!({ "articles": articles }))?,
+  )
+  .expect("Could not create 404 file");
 
   Ok(())
 }
