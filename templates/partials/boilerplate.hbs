@@ -19,7 +19,7 @@
   <meta name="description"
     content="{{#if desc}}{{desc}} - Read more at the Trustworthy Times{{else}}The Trustworthy Times{{/if}}" />
 
-  <meta name="url" content={{url}} />
+  <meta name="url" content={{URL}} />
   <meta name="theme-color" content="#5e325e">
   <meta name="author" content="darcy" />
 
@@ -36,7 +36,7 @@
 
   <!-- See {{>url}} for more info -->
 
-  <link rel="stylesheet" href="{{>BASE_URL}}/css/global.css" />
+  {{>STYLE name="global"}}
 
   {{#if IS_DEV}} {{>dev}} {{/if}}
 </head>

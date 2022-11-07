@@ -1,16 +1,26 @@
 use std::error::Error;
 
-use newsmarkdown::compile::{clean_build_dir, compile_articles, render_articles, render_root_files, compile_styles};
+use serde_json::{json, Value};
+use unreact::prelude::*;
+
+use trustworthytimes::get_articles;
+
+const URL: &str = "https://trustworthytimes.github.io";
 
 fn main() -> Result<(), Box<dyn Error>> {
-  clean_build_dir()?;
+  let articles = get_articles()?;
 
-  let articles = compile_articles()?;
+  let mut app = Unreact::new(Config::github_pages(), is_dev(), URL)?;
 
-  render_root_files(&articles)?;
-  render_articles(&articles)?;
+  app
+    .index("index", &json!({ "articles": articles }))?
+    .not_found("404", &Value::Null)?;
 
-  compile_styles()?;
+  for article in articles {
+    app.page(&format!("news/{}", article.id), "article", &json!(article))?;
+  }
+
+  app.finish()?;
 
   Ok(())
 }
