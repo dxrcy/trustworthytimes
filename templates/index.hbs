@@ -5,11 +5,13 @@
 <section class="content articles">
   {{#each articles}}
   {{#with this}}
-  <a href="news/{{id}}{{> IF_EXT}}">
+
+  <a href="news/{{id}}">
     <h2 class="headline">
       {{#if headline}}
       {{headline}}
       {{else}}
+
       <span class="missing">
         [no headline]
       </span>
@@ -20,13 +22,16 @@
       {{#if desc}}
       {{desc}}
       {{else}}
+
       <span class="missing">
         [no desc]
       </span>
       {{/if}}
     </h3>
+
     <hr />
   </a>
+
   {{/with}}
   {{/each}}
 </section>
