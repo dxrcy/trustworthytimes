@@ -5,6 +5,8 @@ use std::{error::Error, fs};
 use news::Article;
 use unreact::is_dev;
 
+pub const URL: &str = "https://trustworthytimes.github.io";
+
 pub fn get_articles() -> Result<Vec<Article>, Box<dyn Error>> {
   Ok(
     // Loop through input directory files

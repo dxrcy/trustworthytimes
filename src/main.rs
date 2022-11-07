@@ -3,14 +3,19 @@ use std::error::Error;
 use serde_json::{json, Value};
 use unreact::prelude::*;
 
-use trustworthytimes::get_articles;
-
-const URL: &str = "https://trustworthytimes.github.io";
+use trustworthytimes::{get_articles, URL};
 
 fn main() -> Result<(), Box<dyn Error>> {
   let articles = get_articles()?;
 
-  let mut app = Unreact::new(Config::github_pages(), is_dev(), URL)?;
+  let mut app = Unreact::new(
+    Config {
+      minify: false,
+      ..Config::github_pages()
+    },
+    is_dev(),
+    URL,
+  )?;
 
   app
     .index("index", &json!({ "articles": articles }))?

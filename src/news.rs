@@ -1,8 +1,9 @@
 use regex::Regex;
 use serde::Serialize;
 use std::collections::HashMap;
+use unreact::is_dev;
 
-use crate::escape_html;
+use crate::{escape_html, URL};
 
 /// Article metadata and body, with id
 #[derive(Debug, Clone, Serialize)]
@@ -84,6 +85,24 @@ fn include_meta(body: &str, meta: &HashMap<String, String>) -> String {
   body
 }
 
+/// Replace `@` at start of link with url
+fn replace_with_url(link: &str) -> String {
+  if link.starts_with('@') {
+    // Remove first char
+    let mut chars = link.chars();
+    chars.next();
+
+    // Use `URL`, or dev url if `is_dev`
+    if is_dev() {
+      return format!("http://{}{}", unreact::dev::ADDRESS, chars.as_str());
+    } else {
+      return URL.to_string() + chars.as_str();
+    }
+  }
+
+  link.to_string()
+}
+
 /// Create and format links of body
 #[allow(clippy::format_push_string)]
 fn init_links(body: &str) -> String {
@@ -98,7 +117,7 @@ fn init_links(body: &str) -> String {
       if ch == ']' {
         let split = content.split('|').collect::<Vec<&str>>();
         if let Some(desc) = split.first() {
-          let href = split.get(1).unwrap_or(&"#");
+          let href = replace_with_url(split.get(1).unwrap_or(&"#").trim());
           output += &format!("<a href={href}> {desc} </a>");
         }
         link = None;
