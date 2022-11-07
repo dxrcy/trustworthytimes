@@ -1,9 +1,11 @@
 # Todo
 
-- Create dev server
 - Add tests
 - Filter `.test.news` files
 - Multiple images
 - - Syntax something like: `@image[samplename;imagelink;alt]`
-- Minify html/css files?
-- - With `minify-html` crate possibly
+- Add tags for importance of an article
+- - `@rank:0` - Hidden completely, except url
+- - `@rank:1` - Bottom of page
+- - `@rank:2` (default) - Shown normally
+- - `@rank:3` - Top of page, recommended article
