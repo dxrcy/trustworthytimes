@@ -1,7 +1,15 @@
+@font-face {
+  font-family: Footlight;
+  src: local("Footlight"), url(../font/Footlight.woff2);
+}
+
+html,
 body {
-  background-color: #111;
+  background-color: #131516 !important;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  scroll-behavior: smooth;
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 a {

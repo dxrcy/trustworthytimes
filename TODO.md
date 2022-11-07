@@ -8,3 +8,4 @@
 - - `@rank:1` - Bottom of page
 - - `@rank:2` (default) - Shown normally
 - - `@rank:3` - Top of page, recommended article
+- Change partials to PascalCase?

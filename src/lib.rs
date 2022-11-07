@@ -7,14 +7,16 @@ use unreact::is_dev;
 
 pub const URL: &str = "https://trustworthytimes.github.io";
 
-pub fn get_articles() -> Result<Vec<Article>, Box<dyn Error>> {
+pub fn get_articles(ignore_test_files: bool) -> Result<Vec<Article>, Box<dyn Error>> {
   Ok(
     // Loop through input directory files
     fs::read_dir("./news")
       .expect("Could not read input directory")
       .flatten()
       // Filter - ignore '.test.news' files in production
-      .filter(|file| is_dev() || !file.path().to_str().unwrap_or("").contains(".test."))
+      .filter(|file| {
+        (is_dev() && !ignore_test_files) || !file.path().to_str().unwrap_or("").contains(".test.")
+      })
       // Map to articles
       .map(|file| {
         Article::from(

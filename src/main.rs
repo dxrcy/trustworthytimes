@@ -6,7 +6,7 @@ use unreact::prelude::*;
 use trustworthytimes::{get_articles, URL};
 
 fn main() -> Result<(), Box<dyn Error>> {
-  let articles = get_articles()?;
+  let articles = get_articles(true)?;
 
   let mut app = Unreact::new(
     Config {
@@ -18,11 +18,11 @@ fn main() -> Result<(), Box<dyn Error>> {
   )?;
 
   app
-    .index("index", &json!({ "articles": articles }))?
-    .not_found("404", &Value::Null)?;
+    .index("pages/index", &json!({ "articles": articles }))?
+    .not_found("pages/404", &Value::Null)?;
 
   for article in articles {
-    app.page(&format!("news/{}", article.id), "article", &json!(article))?;
+    app.page(&format!("news/{}", article.id), "pages/article", &json!(article))?;
   }
 
   app.finish()?;
