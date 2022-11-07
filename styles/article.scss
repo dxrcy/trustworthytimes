@@ -1,0 +1,37 @@
+.article {
+  .topics {
+    color: grey;
+  }
+
+  .headline {
+    display: inline-block;
+    margin: 10px 0;
+    font-size: clamp(20px, 10vw, 40px);
+    // font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+
+  .image {
+    max-width: 300px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .content {
+    line-height: 160%;
+
+    a:not(:hover) {
+      text-decoration: none;
+    }
+
+    blockquote {
+      display: inline-block;
+      margin-right: 0;
+      margin-left: clamp(0px, 4vw, 40px);
+      padding: 10px;
+      border-left: 10px solid #553b58;
+      background-color: #25262b;
+    }
+  }
+}

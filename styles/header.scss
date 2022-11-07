@@ -13,6 +13,14 @@
     font-size: clamp(20px, 17vw, 60px);
     text-decoration: none;
 
+    &:focus {
+      outline: none;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+
     span {
       display: block;
       font-family: Footlight, "Times New Roman", Times, serif;
