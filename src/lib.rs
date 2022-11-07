@@ -3,6 +3,7 @@ pub mod news;
 use std::{error::Error, fs};
 
 use news::Article;
+use unreact::is_dev;
 
 pub fn get_articles() -> Result<Vec<Article>, Box<dyn Error>> {
   Ok(
@@ -10,8 +11,10 @@ pub fn get_articles() -> Result<Vec<Article>, Box<dyn Error>> {
     fs::read_dir("./news")
       .expect("Could not read input directory")
       .flatten()
+      // Filter - ignore '.test.news' files in production
+      .filter(|file| is_dev() || !file.path().to_str().unwrap_or("").contains(".test."))
+      // Map to articles
       .map(|file| {
-        // Compile file contents to article and push to vector
         Article::from(
           // Get id (filename without extension) from file path
           &get_file_name(&file).expect("Could not read name of input file"),

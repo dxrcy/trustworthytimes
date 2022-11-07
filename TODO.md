@@ -1,7 +1,6 @@
 # Todo
 
 - Add tests
-- Filter `.test.news` files
 - Multiple images
 - - Syntax something like: `@image[samplename;imagelink;alt]`
 - Add tags for importance of an article
