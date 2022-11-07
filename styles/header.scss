@@ -1,0 +1,39 @@
+.header {
+  position: relative;
+  max-height: 100px;
+  margin: 5px;
+  margin-top: 13px;
+  margin-bottom: 20px;
+  padding-left: clamp(0.1px, 0.8vw, 20px);
+  font-weight: normal;
+
+  > a {
+    display: inline-block;
+    line-height: 0;
+    font-size: clamp(20px, 17vw, 60px);
+    text-decoration: none;
+
+    span {
+      display: block;
+      font-family: Footlight, "Times New Roman", Times, serif;
+
+      &.the {
+        margin-top: 4%;
+        margin-left: 14%;
+        font-size: 50%;
+        color: #8b6491;
+      }
+
+      &.trustworthy {
+        margin-top: 9%;
+        color: #e2cfe8;
+      }
+
+      &.times {
+        margin-top: 15%;
+        margin-left: 33%;
+        color: #754975;
+      }
+    }
+  }
+}
