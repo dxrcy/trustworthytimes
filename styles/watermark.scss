@@ -1,0 +1,15 @@
+.watermark {
+  // Don't show for small screens
+  @media (max-width: 590px) {
+    display: none;
+  }
+
+  // Top right, faint
+  img {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    height: 100px;
+    opacity: 0.2;
+  }
+}
