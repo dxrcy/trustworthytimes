@@ -6,14 +6,13 @@
 
 - Switch to local images
 - Fix 'missing' values
-- Add tests
 - Add tags for importance of an article
 - - `@rank:0` - Hidden completely, except url
 - - `@rank:1` - Bottom of page
 - - `@rank:2` (default) - Shown normally
 - - `@rank:3` - Top of page, recommended article
 
-## Might do later
+## Might do later, maybe
 
 - Multiple images
 - - Syntax something like: `@image[samplename;imagelink;alt]`
@@ -25,6 +24,5 @@
 
 ## Reuse metadata
 
-### Authors
-
-- Kotcheru Kinglson
+- Authors
+- - Kotcheru Kinglson
