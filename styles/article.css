@@ -1,10 +1,51 @@
-.article .topics {
-  color: grey;
+.article {
+  margin: 20px;
 }
-.article .headline {
+.article .meta .topics {
+  color: grey;
+  font-weight: bold;
+}
+.article .meta .topics span:not(:first-of-type) {
+  margin-left: 10px;
+}
+.article .meta .topics span:not(:first-of-type)::before {
+  content: "/";
+  margin-right: 10px;
+  font-weight: normal;
+  color: #754975;
+}
+@media (max-width: 400px) {
+  .article .meta .topics span {
+    display: block;
+  }
+  .article .meta .topics span:not(:first-of-type) {
+    margin-left: 0px;
+  }
+}
+.article .meta .headline {
   display: inline-block;
   margin: 10px 0;
   font-size: clamp(20px, 10vw, 40px);
+}
+.article .meta .stats {
+  margin-top: 0;
+  font-size: 110%;
+  color: #aaa;
+}
+.article .meta .stats > span {
+  margin-right: 15px;
+}
+.article .meta .stats > span .icon {
+  margin-right: 0;
+  color: #8b6491;
+}
+@media (max-width: 400px) {
+  .article .meta .stats > span {
+    display: block;
+  }
+  .article .meta .stats > span .icon {
+    margin-right: 5px;
+  }
 }
 .article .image {
   max-width: 300px;
