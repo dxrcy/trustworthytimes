@@ -4,6 +4,8 @@
 
 ## Do later
 
+- Switch to local images
+- Fix 'missing' values
 - Add tests
 - Add tags for importance of an article
 - - `@rank:0` - Hidden completely, except url

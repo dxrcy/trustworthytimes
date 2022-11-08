@@ -6,7 +6,7 @@ use unreact::prelude::*;
 use trustworthytimes::{get_articles, URL};
 
 fn main() -> Result<(), Box<dyn Error>> {
-  let articles = get_articles(true)?;
+  let articles = get_articles(false)?;
 
   let mut app = Unreact::new(
     Config {
