@@ -11,7 +11,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   let mut app = Unreact::new(
     Config {
       minify: false,
-      ..Config::github_pages()
+      ..Config::default()
     },
     is_dev(),
     URL,
@@ -22,7 +22,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     .not_found("pages/404", &Value::Null)?;
 
   for article in articles {
-    app.page(&format!("news/{}", article.id), "pages/article", &json!(article))?;
+    app.page(
+      &format!("news/{}", article.id),
+      "pages/article",
+      &json!(article),
+    )?;
   }
 
   app.finish()?;

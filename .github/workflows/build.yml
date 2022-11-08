@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+# ? This might be required ?
+# permissions:
+#   contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      # Run compilation script with Rust
+      - name: Build 🔧
+        run: |
+          cargo run
+
+      # Push changes with plugin
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # This must be the build directory
+          folder: ./build
