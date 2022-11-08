@@ -1,13 +1,61 @@
 .article {
-  .topics {
-    color: grey;
-  }
+  margin: 20px;
 
-  .headline {
-    display: inline-block;
-    margin: 10px 0;
-    font-size: clamp(20px, 10vw, 40px);
-    // font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  .meta {
+    .topics {
+      color: grey;
+      font-weight: bold;
+
+      span {
+        &:not(:first-of-type) {
+          margin-left: 10px;
+
+          &::before {
+            content: "/";
+            margin-right: 10px;
+            font-weight: normal;
+            color: #754975;
+          }
+        }
+
+        @media (max-width: 400px) {
+          display: block;
+
+          &:not(:first-of-type) {
+            margin-left: 0px;
+          }
+        }
+      }
+    }
+
+    .headline {
+      display: inline-block;
+      margin: 10px 0;
+      font-size: clamp(20px, 10vw, 40px);
+    }
+
+    .stats {
+      margin-top: 0;
+      font-size: 110%;
+      color: #aaa;
+
+      > span {
+        margin-right: 15px;
+
+        .icon {
+          margin-right: 0;
+          color: #8b6491;
+        }
+
+        @media (max-width: 400px) {
+          display: block;
+
+          .icon {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
   }
 
   .image {

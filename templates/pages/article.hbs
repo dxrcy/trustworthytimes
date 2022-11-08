@@ -1,15 +1,15 @@
 {{#>boilerplate title=headline desc=desc image=image}}
 
 <main id="main">
-  <article class="article">
-    {{>STYLE name="article"}}
+  {{>STYLE name="article"}}
 
+  <article class="article">
     <section class="meta">
+
+
       <div class="topics">
         {{#each topic}}
-        {{!--TODO Change to ::before when css --}}
         <span>
-          /
           {{this}}
         </span>
         {{/each}}
@@ -26,15 +26,25 @@
       </h1>
 
       <h2 class="stats">
-        {{!--TODO Add icons --}}
-        - <span class="author"> {{#if author}}{{author}}{{else}}<span class="missing">Unknown
-            Author</span>{{/if}}</span>
-        - <span class="date"> {{#if date}}{{date}}{{else}}<span class="missing">Unknown Date</span>{{/if}}</span>
-        - <span class="topic">
-          {{#if topic}}{{#each topic}}{{#if @last}}{{this}}{{/if}}{{/each}}{{else}}<span class="missing">Unknown
-            Topic</span>{{/if}}
+        <span class="author">
+          <span class="icon">🗣</span>
+          {{#if author}}{{author}}
+          {{else}}<span class="missing">Unknown Author</span>{{/if}}
+        </span>
+
+        <span class="date">
+          <span class="icon">🕘︎</span>
+          {{#if date}}{{date}}
+          {{else}}<span class="missing">Unknown Date</span>{{/if}}
+        </span>
+
+        <span class="topic">
+          <span class="icon">🏳</span>
+          {{#if topic}}{{#each topic}}{{#if @last}}{{this}}{{/if}}{{/each}}
+          {{else}}<span class="missing">Unknown Topic</span>{{/if}}
         </span>
       </h2>
+
     </section>
 
     <section class="image">

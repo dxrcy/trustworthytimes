@@ -11,11 +11,14 @@
 - - `@rank:1` - Bottom of page
 - - `@rank:2` (default) - Shown normally
 - - `@rank:3` - Top of page, recommended article
+- Better icons
+- - Font awesome ???
 
 ## Might do later, maybe
 
 - Multiple images
 - - Syntax something like: `@image[samplename;imagelink;alt]`
+- Add print styles
 
 ## Refactoring
 
