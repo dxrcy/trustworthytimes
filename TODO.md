@@ -22,3 +22,9 @@
 
 - Change partials to PascalCase?
 - Add trace comment to each template file
+
+## Reuse metadata
+
+### Authors
+
+- Kotcheru Kinglson
