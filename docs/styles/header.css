@@ -61,6 +61,7 @@
 }
 .header .skip:not(:focus-within) {
   opacity: 0;
+  pointer-events: none;
 }
 .header .skip:focus {
   outline: none;
