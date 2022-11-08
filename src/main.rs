@@ -26,6 +26,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   }
 
   app.finish()?;
+  println!("Successfully compiled.");
 
   Ok(())
 }
