@@ -69,6 +69,7 @@
     // Hide when not focused
     &:not(:focus-within) {
       opacity: 0;
+      pointer-events: none;
     }
 
     &:focus {
