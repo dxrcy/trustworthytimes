@@ -1389,9 +1389,9 @@ checksum = "c0edd1e5b14653f783770bce4a4dabb4a5108a5370a5f5d8cfe8710c361f6c8b"
 
 [[package]]
 name = "unreact"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d389676361bfbd4577d832c90b42042ff06d90e1046110cc645466080fce3ad"
+checksum = "fe0c82000ef3c1aad1d38e995c0dc5a6a9fbb51ed2a7f8b2567e09356b9717b0"
 dependencies = [
  "css-minify",
  "dircpy",
@@ -1399,7 +1399,6 @@ dependencies = [
  "handlebars",
  "http",
  "hyper",
- "just",
  "minify-html",
  "serde",
  "serde_json",
