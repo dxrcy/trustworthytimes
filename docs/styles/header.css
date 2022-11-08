@@ -4,37 +4,64 @@
   margin: 5px;
   margin-top: 13px;
   margin-bottom: 20px;
-  padding-left: clamp(0.1px, 0.8vw, 20px);
+  font-size: clamp(20px, 17vw, 60px);
+  font-family: Footlight, "Times New Roman", Times, serif;
   font-weight: normal;
 }
-.header > a {
+.header:focus-within .middle {
+  visibility: hidden;
+}
+.header .link {
   display: inline-block;
   line-height: 0;
-  font-size: clamp(20px, 17vw, 60px);
   text-decoration: none;
 }
-.header > a:focus {
+.header .link:focus {
   outline: none;
 }
-.header > a:focus span {
+.header .link:focus span {
   text-decoration: underline;
 }
-.header > a span {
-  display: block;
-  font-family: Footlight, "Times New Roman", Times, serif;
+.header .link:focus .middle {
+  visibility: visible;
 }
-.header > a span.the {
+.header .link .top,
+.header .link .middle,
+.header .link .bottom {
+  display: block;
+}
+.header .link .top.top,
+.header .link .middle.top,
+.header .link .bottom.top {
   margin-top: 4%;
   margin-left: 14%;
   font-size: 50%;
   color: #8b6491;
 }
-.header > a span.trustworthy {
+.header .link .top.middle,
+.header .link .middle.middle,
+.header .link .bottom.middle {
   margin-top: 9%;
   color: #e2cfe8;
 }
-.header > a span.times {
+.header .link .top.bottom,
+.header .link .middle.bottom,
+.header .link .bottom.bottom {
   margin-top: 15%;
   margin-left: 33%;
   color: #754975;
+}
+.header .skip {
+  position: absolute;
+  display: block;
+  top: 17%;
+  font-size: 80%;
+  white-space: nowrap;
+  color: #e2cfe8;
+}
+.header .skip:not(:focus-within) {
+  opacity: 0;
+}
+.header .skip:focus {
+  outline: none;
 }

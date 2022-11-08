@@ -22,14 +22,17 @@
   <meta name="theme-color" content="#5e325e">
   <meta name="author" content="darcy" />
 
-  {{!-- Add once have images --}}
-  {{!-- Icon --}}
-  {{!--
-  <meta name="image" content="image/logo.png" />
-  <meta property="image" content="image/logo.png" />
-  <meta name="og:image" content="image/logo.png" />
-  <meta property="og:image" content="image/logo.png" />
-  --}}
+  {{!-- Custom image --}}
+  {{#if image}}
+  <meta name="image" property="image" content={{image}} />
+  <meta name="og:image" property="og:image" content={{image}} />
+
+  {{!-- Default image --}}
+  {{else}}
+  <meta name="image" property="image" content="{{>URL}}/public/image/logo.png" />
+  <meta name="og:image" property="og:image" content="{{>URL}}/public/image/logo.png" />
+  {{/if}}
+
   {{!--
   <link rel="shortcut icon" href="%PUBLIC_URL%/image/icon.png"> --}}
 
