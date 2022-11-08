@@ -3,7 +3,6 @@
   padding: 0;
 
   .item {
-    // background-color: orange;
     display: flex;
 
     // Margin between items
@@ -12,15 +11,14 @@
     }
 
     .link {
-      // background-color: green;
       display: flex;
       text-decoration: none;
 
       .image {
-        // background-color: blue;
         position: relative;
         width: 100px;
         height: 100px;
+        flex-shrink: 0;
 
         img {
           width: 100%;
@@ -37,14 +35,12 @@
         margin-left: 10px;
 
         .headline {
-          // background-color: magenta;
           margin: 0;
           margin-bottom: 5px;
           font-size: clamp(20px, 4vw, 32px);
         }
 
         .desc {
-          // background-color: red;
           margin: 0;
           font-size: clamp(15px, 3vw, 23px);
           font-weight: normal;

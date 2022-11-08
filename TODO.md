@@ -9,3 +9,4 @@
 - - `@rank:2` (default) - Shown normally
 - - `@rank:3` - Top of page, recommended article
 - Change partials to PascalCase?
+- Add trace comment to each template file

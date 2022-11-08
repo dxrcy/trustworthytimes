@@ -1,9 +1,13 @@
 <h1 class="header">
   {{>STYLE name="header"}}
 
-  <a href={{>URL}} title="The most honest news source">
-    <span class="the">the</span>
-    <span class="trustworthy">Trustworthy</span>
-    <span class="times">Times</span>
+  {{!-- Main header --}}
+  <a href={{>URL}} title="The most honest news source" class="link">
+    <span class="top">the</span>
+    <span class="middle">Trustworthy</span>
+    <span class="bottom">Times</span>
   </a>
+
+  {{!-- Skip to main content --}}
+  <a class="skip" tabIndex="0" href="#main">Skip to Content</a>
 </h1>
