@@ -8,6 +8,11 @@
     // Margin between items
     &:not(:last-of-type) {
       margin-bottom: 20px;
+
+      // More compact
+      @media print {
+        margin-bottom: 10px;
+      }
     }
 
     .link {
@@ -45,6 +50,11 @@
           font-size: clamp(15px, 3vw, 23px);
           font-weight: normal;
           color: #a0a0a0;
+
+          // Lighter
+          @media print {
+            opacity: 0.7;
+          }
         }
       }
 
