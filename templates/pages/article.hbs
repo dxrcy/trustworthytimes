@@ -47,11 +47,13 @@
 
     </section>
 
+    {{#if image}}
     <section class="image">
-      {{#if image}}
-      <img src={{image}} alt="{{#if alt}}{{alt}}{{else}}Some image{{/if}}" />
-      {{/if}}
+      <div class="wrap">
+        <img src={{image}} alt="{{#if alt}}{{alt}}{{else}}Some image{{/if}}" />
+      </div>
     </section>
+    {{/if}}
 
     <section class="content">
       {{#if body}}

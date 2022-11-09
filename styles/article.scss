@@ -58,11 +58,28 @@
     }
   }
 
+  // Container for article image
+  // Fill width on small screen
   .image {
-    max-width: 300px;
+    @media (min-width: 1000px) {
+      float: right;
+      max-width: 40%;
+      margin-top: -30px;
+    }
 
+    // Image
+    // Centered in container
     img {
-      width: 100%;
+      display: block;
+      max-width: Min(100%, 500px);
+      margin: auto;
+      border-radius: 3px;
+
+      // Fancy effects
+      transition: transform 0.2s;
+      &:hover {
+        transform: scale(0.99);
+      }
     }
   }
 
