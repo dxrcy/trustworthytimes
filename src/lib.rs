@@ -3,6 +3,7 @@ pub mod news;
 use std::{error::Error, fs};
 
 use news::Article;
+use rand::{seq::SliceRandom, thread_rng};
 use unreact::is_dev;
 
 pub const URL: &str = "https://trustworthytimes.github.io";
@@ -49,4 +50,12 @@ pub fn get_file_name(path: &fs::DirEntry) -> Option<String> {
 /// Does not include backtick!
 pub fn escape_html(string: &str) -> String {
   handlebars::html_escape(string).replace("&#x60;", "`")
+}
+
+/// Shuffle a vector
+pub fn shuffle<T>(vec: Vec<T>) -> Vec<T> {
+  let mut vec = vec;
+  let mut rng = thread_rng();
+  vec.shuffle(&mut rng);
+  vec
 }

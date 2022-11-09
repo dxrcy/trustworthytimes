@@ -23,6 +23,7 @@
     // Scroll animation
     animation: scrolling linear 20s infinite;
     animation-play-state: running;
+    animation-delay: -12s;
 
     @keyframes scrolling {
       from {

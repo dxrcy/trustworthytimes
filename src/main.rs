@@ -3,10 +3,10 @@ use std::error::Error;
 use serde_json::{json, Value};
 use unreact::prelude::*;
 
-use trustworthytimes::{get_articles, URL};
+use trustworthytimes::{get_articles, URL, shuffle};
 
 fn main() -> Result<(), Box<dyn Error>> {
-  let articles = get_articles(false)?;
+  let articles = shuffle(get_articles(false)?);
 
   let mut app = Unreact::new(
     Config {
