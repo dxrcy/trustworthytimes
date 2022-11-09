@@ -1,15 +1,1 @@
-@font-face {
-  font-family: Footlight;
-  src: local("Footlight"), url(../public/font/Footlight.woff2);
-}
-html,
-body {
-  background-color: #131516 !important;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-  scroll-behavior: smooth;
-  color: white;
-}
-
-a {
-  color: inherit;
-}
+@font-face {font-family:Footlight;src:local("Footlight"),url(../public/font/Footlight.woff2)}body,html{background:#131516!important;font-family:"Trebuchet MS","Lucida Sans Unicode","Lucida Grande","Lucida Sans",Arial,sans-serif;scroll-behavior:smooth;color:white}a{color:inherit}
