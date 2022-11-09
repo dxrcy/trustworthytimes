@@ -47,11 +47,27 @@
     margin-right: 5px;
   }
 }
-.article .image {
-  max-width: 300px;
+@media (min-width: 1000px) {
+  .article .image {
+    float: right;
+    max-width: 40%;
+    margin-top: -30px;
+  }
 }
 .article .image img {
-  width: 100%;
+  display: block;
+  max-width: min(100%, 500px);
+  margin: auto;
+  border-radius: 3px;
+  transition: transform 0.2s;
+}
+@media print {
+  .article .image img {
+    max-width: min(100%, 300px);
+  }
+}
+.article .image img:hover {
+  transform: scale(0.99);
 }
 .article .content {
   line-height: 160%;

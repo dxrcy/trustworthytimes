@@ -8,6 +8,11 @@
 .articles_list .item:not(:last-of-type) {
   margin-bottom: 20px;
 }
+@media print {
+  .articles_list .item:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+}
 .articles_list .item .link {
   display: flex;
   text-decoration: none;
@@ -40,6 +45,11 @@
   font-size: clamp(15px, 3vw, 23px);
   font-weight: normal;
   color: #a0a0a0;
+}
+@media print {
+  .articles_list .item .link .text .desc {
+    opacity: 0.7;
+  }
 }
 .articles_list .item .link:hover img {
   transform: scale(0.93) !important;
