@@ -1,0 +1,33 @@
+<section class="scroller">
+  {{>STYLE name="scroller"}}
+
+  <div class="move">
+
+    {{#each articles}}
+    {{#with this}}
+
+    <a href="{{>URL}}/news/{{id}}" class="link">
+
+      <section class="image" title="{{alt}}">
+        {{!-- 'alt' is whitespace to stop unloaded image display --}}
+        <img alt=" " src="{{image}}" />
+      </section>
+      
+      <p class="headline" title="{{desc}}">
+        {{#if headline}}
+        {{headline}}
+
+        {{else}}
+        <span class="missing">
+          [no headline]
+        </span>
+        {{/if}}
+      </p>
+
+    </a>
+
+    {{/with}}
+    {{/each}}
+
+  </div>
+</section>

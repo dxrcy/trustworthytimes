@@ -10,17 +10,22 @@ fn main() -> Result<(), Box<dyn Error>> {
 
   let mut app = Unreact::new(
     Config {
-      minify: false,
+      // minify: false,
       ..Config::default()
     },
     is_dev(),
     URL,
   )?;
 
+  // Include `articles` in every template
+  app.set_globals(json!({ "articles": articles }));
+
+  // Index and 404 pages
   app
-    .index("pages/index", &json!({ "articles": articles }))?
+    .index("pages/index", &Value::Null)?
     .not_found("pages/404", &Value::Null)?;
 
+  // Article pages in `/news/*`
   for article in articles {
     app.page(
       &format!("news/{}", article.id),

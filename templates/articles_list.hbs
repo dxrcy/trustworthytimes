@@ -10,7 +10,7 @@
     <a href="{{>URL}}/news/{{id}}" class="link">
 
       <section class="image">
-        <img alt="{{#if alt}}{{alt}}{{else}}[unknown image]{{/if}}" src={{image}} />
+        <img alt="{{#if alt}}{{alt}}{{else}}[unknown image]{{/if}}" src="{{image}}" title="{{alt}}" />
       </section>
 
       <section class="text">
@@ -43,4 +43,5 @@
 
   {{/with}}
   {{/each}}
+
 </ul>

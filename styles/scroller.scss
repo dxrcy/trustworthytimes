@@ -1,0 +1,85 @@
+.scroller {
+  display: block;
+  height: 35px;
+  margin: 0 10px;
+  margin-top: 5px;
+  overflow: hidden;
+  background-color: #0c0e10;
+
+  // Fancy effects - scroll across
+  &:hover,
+  &:focus-within {
+    .move {
+      // Pause scroll until not hovered or focused
+      // ? Does not auto play when focus leaves
+      animation-play-state: paused;
+    }
+  }
+
+  .move {
+    display: inline-flex;
+    height: 100%;
+
+    // Scroll animation
+    animation: scrolling linear 20s infinite;
+    animation-play-state: running;
+
+    @keyframes scrolling {
+      from {
+        transform: translateX(100vw);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    // Disable wrapping
+    white-space: nowrap;
+
+    .link {
+      display: flex;
+      height: 100%;
+      text-decoration: none;
+
+      &:not(:first-of-type) {
+        margin-left: 40px;
+      }
+
+      &:hover,
+      &:focus {
+        outline: none;
+        text-decoration: underline;
+
+        img {
+          // Fancy effects
+          transform: scale(1.2);
+        }
+      }
+
+      // &:focus {
+      //   outline: none;
+      //   text-decoration: underline;
+      // }
+
+      .image {
+        height: 100%;
+        aspect-ratio: 1/1;
+        background-color: #333;
+
+        img {
+          display: inline-block;
+          height: 100%;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+          transition: transform 0.2s;
+        }
+      }
+
+      .headline {
+        display: inline-block;
+        margin: auto;
+        margin-left: 10px;
+      }
+    }
+  }
+}
