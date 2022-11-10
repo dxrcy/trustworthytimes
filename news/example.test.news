@@ -9,6 +9,7 @@
 @image  https://imagelink.com
 @alt    Some image
 
+@rank:0
 @tags   randomTag | bruh
 
 no other content here is included in the body
