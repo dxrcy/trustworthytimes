@@ -139,20 +139,16 @@ fn init_links(body: &str) -> String {
 
 /// Format basic inline html styles of body
 fn format_primatives(body: &str) -> String {
+  #[derive(Default)]
   struct Primatives {
     italic: bool,
     bold: bool,
     underline: bool,
     strike: bool,
     code: bool,
+    purple: bool,
   }
-  let mut prims = Primatives {
-    italic: false,
-    bold: false,
-    underline: false,
-    strike: false,
-    code: false,
-  };
+  let mut prims = Primatives::default();
 
   let mut output = String::new();
   let mut is_escaped = false;
@@ -198,6 +194,16 @@ fn format_primatives(body: &str) -> String {
         '`' => {
           output.push_str(if prims.code { "</code>" } else { "<code>" });
           prims.code = !prims.code;
+        }
+
+        // Underline
+        '%' => {
+          output.push_str(if prims.purple {
+            "</span>"
+          } else {
+            r#"<span class="purple">"#
+          });
+          prims.purple = !prims.purple;
         }
 
         // Other

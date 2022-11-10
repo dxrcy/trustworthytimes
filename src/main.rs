@@ -9,10 +9,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   let articles = shuffle(get_articles(false)?);
 
   let mut app = Unreact::new(
-    Config {
-      // minify: false,
-      ..Config::default()
-    },
+    Config::default(),
     is_dev(),
     URL,
   )?;
