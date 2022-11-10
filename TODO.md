@@ -13,6 +13,8 @@
 - - `@rank:3` - Top of page, recommended article
 - Better icons
 - - Font awesome ???
+- Add tags page/s
+- Add author page/s
 - Google search
 
 ## Might do later, maybe
