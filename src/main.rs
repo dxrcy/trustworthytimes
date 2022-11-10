@@ -3,16 +3,12 @@ use std::error::Error;
 use serde_json::{json, Value};
 use unreact::prelude::*;
 
-use trustworthytimes::{get_articles, URL, shuffle};
+use trustworthytimes::{get_articles, shuffle, URL};
 
 fn main() -> Result<(), Box<dyn Error>> {
   let articles = shuffle(get_articles(false)?);
 
-  let mut app = Unreact::new(
-    Config::default(),
-    is_dev(),
-    URL,
-  )?;
+  let mut app = Unreact::new(Config::default(), is_dev(), URL)?;
 
   // Include `articles` in every template
   app.set_globals(json!({ "articles": articles }));
