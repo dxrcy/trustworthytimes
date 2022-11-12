@@ -5,10 +5,20 @@ use unreact::prelude::*;
 
 use trustworthytimes::{get_articles, shuffle, URL};
 
-fn main() -> Result<(), Box<dyn Error>> {
-  let articles = shuffle(get_articles(false)?);
+const DO_MINIFY: bool = false;
+const USE_TEST_ARTICLES: bool = false;
 
-  let mut app = Unreact::new(Config::default(), is_dev(), URL)?;
+fn main() -> Result<(), Box<dyn Error>> {
+  let articles = shuffle(get_articles(USE_TEST_ARTICLES)?);
+
+  let mut app = Unreact::new(
+    Config {
+      minify: DO_MINIFY,
+      ..Config::default()
+    },
+    is_dev(),
+    URL,
+  )?;
 
   // Include `articles` in every template
   app.set_globals(json!({ "articles": articles }));
