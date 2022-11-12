@@ -36,6 +36,30 @@ impl Article {
         .map(|x| x.trim().to_string())
         .collect()
     });
+
+    // Format image path
+    let image = {
+      // Case to use local file
+      let image = Self::hashmap_key(meta, "image");
+      if let Some(name) = &image {
+        if name == "@" {
+          // Use image from id
+          Some(format!("{url}/public/thumb/{id}.jpg", url = real_url()))
+        } else if name.starts_with('@') {
+          // Use custom path relative to url
+          // Remove first character
+          let mut chars = name.chars();
+          chars.next();
+          Some(real_url() + chars.as_str())
+        } else {
+          // Full url
+          image
+        }
+      } else {
+        None
+      }
+    };
+
     // Vector
     let tags = match Self::hashmap_key(meta, "tags") {
       Some(s) => s
@@ -54,7 +78,7 @@ impl Article {
       author: Self::hashmap_key(meta, "author"),
       date: Self::hashmap_key(meta, "date"),
       topic,
-      image: Self::hashmap_key(meta, "image"),
+      image,
       alt: Self::hashmap_key(meta, "alt"),
       tags,
       body: body.to_string(),
@@ -85,6 +109,15 @@ fn include_meta(body: &str, meta: &HashMap<String, String>) -> String {
   body
 }
 
+/// Use `URL`, or dev url if `is_dev`
+fn real_url() -> String {
+  if is_dev() {
+    format!("http://{}", unreact::dev::ADDRESS)
+  } else {
+    URL.to_string()
+  }
+}
+
 /// Replace `@` at start of link with url
 fn replace_with_url(link: &str) -> String {
   if link.starts_with('@') {
@@ -92,15 +125,10 @@ fn replace_with_url(link: &str) -> String {
     let mut chars = link.chars();
     chars.next();
 
-    // Use `URL`, or dev url if `is_dev`
-    if is_dev() {
-      return format!("http://{}{}", unreact::dev::ADDRESS, chars.as_str());
-    } else {
-      return URL.to_string() + chars.as_str();
-    }
+    real_url() + chars.as_str()
+  } else {
+    link.to_string()
   }
-
-  link.to_string()
 }
 
 /// Create and format links of body

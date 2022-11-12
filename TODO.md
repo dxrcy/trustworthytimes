@@ -4,7 +4,6 @@
 
 ## Do later
 
-- Switch to local images
 - Fix 'missing' values
 - Add tags for importance of an article
 - - `@rank:0` - Hidden completely, except url
@@ -15,6 +14,7 @@
 - - Font awesome ???
 - Add tags page/s
 - Add author page/s
+- Convert local images to jpeg ?
 
 ## Might do later, maybe
 
