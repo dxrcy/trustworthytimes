@@ -15,7 +15,6 @@
 - - Font awesome ???
 - Add tags page/s
 - Add author page/s
-- Rename id's
 
 ## Might do later, maybe
 
