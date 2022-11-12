@@ -1,1 +1,12 @@
-@media (max-width: 590px){.watermark{display:none}}.watermark img{position:absolute;top:15px;right:20px;height:100px;opacity:.2}
+@media (max-width: 590px) {
+  .watermark {
+    display: none;
+  }
+}
+.watermark img {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  height: 100px;
+  opacity: 0.2;
+}

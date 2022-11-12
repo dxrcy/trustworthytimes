@@ -1,1 +1,59 @@
-.scroller{display:block;height:35px;margin:0 10px;margin-top:5px;overflow:hidden;background:#0c0e10}.scroller:focus-within .move,.scroller:hover .move{animation-play-state:paused}.scroller .move{display:inline-flex;height:100%;animation:scrolling linear 25s infinite;animation-play-state:running;animation-delay:-12s;white-space:nowrap}@keyframes scrolling{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}.scroller .move .link{display:flex;height:100%;text-decoration:none}.scroller .move .link:not(:first-of-type){margin-left:40px}.scroller .move .link:focus,.scroller .move .link:hover{outline:none;text-decoration:underline}.scroller .move .link:focus img,.scroller .move .link:hover img{transform:scale(1.2)}.scroller .move .link .image{height:100%;aspect-ratio:1/1;background:#333}.scroller .move .link .image img{display:inline-block;height:100%;aspect-ratio:1/1;object-fit:cover;transition:transform .2s}.scroller .move .link .headline{display:inline-block;margin:auto;margin-left:10px}
+.scroller {
+  display: block;
+  height: 35px;
+  margin: 0 10px;
+  margin-top: 5px;
+  overflow: hidden;
+  background-color: #0c0e10;
+}
+.scroller:hover .move, .scroller:focus-within .move {
+  animation-play-state: paused;
+}
+.scroller .move {
+  display: inline-flex;
+  height: 100%;
+  animation: scrolling linear 25s infinite;
+  animation-play-state: running;
+  animation-delay: -12s;
+  white-space: nowrap;
+}
+@keyframes scrolling {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.scroller .move .link {
+  display: flex;
+  height: 100%;
+  text-decoration: none;
+}
+.scroller .move .link:not(:first-of-type) {
+  margin-left: 40px;
+}
+.scroller .move .link:hover, .scroller .move .link:focus {
+  outline: none;
+  text-decoration: underline;
+}
+.scroller .move .link:hover img, .scroller .move .link:focus img {
+  transform: scale(1.2);
+}
+.scroller .move .link .image {
+  height: 100%;
+  aspect-ratio: 1/1;
+  background-color: #333;
+}
+.scroller .move .link .image img {
+  display: inline-block;
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: transform 0.2s;
+}
+.scroller .move .link .headline {
+  display: inline-block;
+  margin: auto;
+  margin-left: 10px;
+}
