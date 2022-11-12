@@ -15,13 +15,14 @@
 - - Font awesome ???
 - Add tags page/s
 - Add author page/s
-- Google search
+- Rename id's
 
 ## Might do later, maybe
 
 - Multiple images
 - - Syntax something like: `@image[samplename;imagelink;alt]`
 - Add print styles
+- Add styles to head in boiler plate [https://handlebarsjs.com/examples/partials/inline-blocks.html](https://handlebarsjs.com/examples/partials/inline-blocks.html)
 
 ## Refactoring
 
@@ -33,3 +34,5 @@
 - Authors
 - - Kotcheru Kinglson
 - - Clemens Wout
+- - Goks Legg
+- - Frekk Dina
