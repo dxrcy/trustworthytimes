@@ -21,7 +21,8 @@
     height: 100%;
 
     // Scroll animation
-    animation: scrolling linear 25s infinite;
+    // Timing is just a guess
+    animation: scrolling linear 45s infinite;
     animation-play-state: running;
     animation-delay: -12s;
 
