@@ -27,6 +27,20 @@
 - Change partials to PascalCase?
 - Add trace comment to each template file
 
+## News
+
+- The Perks of Being STRANDED in the Hills
+- Man Forced to Use PUBLIC Bathroom
+- Woman Didn't Know She Was MISSING Both Legs
+- Should Retail Jobs Be Considered a Form of TORTURE?
+- Cute Little Kitty ASLEEP on My Lap!
+- Controversial Priest Reveals TRUTH About Holy Ghost
+- This Chart Explains Why 'Yellow Fever' Isn't a GOOD Thing
+- 'Give Us MONEY!', Charity Lazily Begs
+- Men Still Terrible at Choosing Cost-Effective Plans
+- [name]'s Wife Is DIVORCING Me
+- Merry Christmas, Here's an Elephant ROCKING OUT
+
 ## Reuse metadata
 
 - Authors
