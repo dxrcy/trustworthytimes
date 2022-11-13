@@ -14,7 +14,6 @@
 - - Font awesome ???
 - Add tags page/s
 - Add author page/s
-- Convert local images to jpeg ?
 
 ## Might do later, maybe
 

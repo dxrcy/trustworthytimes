@@ -1,0 +1,19 @@
+{{#>boilerplate}}
+
+<main id="main">
+
+  <h1>Authors:</h1>
+
+  <ul>
+    {{#each authors}}
+
+    <li>
+      {{@key}} - {{this.0}} articles
+    </li>
+
+    {{/each}}
+  </ul>
+
+</main>
+
+{{/boilerplate}}
