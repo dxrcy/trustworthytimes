@@ -12,7 +12,7 @@
 .scroller .move {
   display: inline-flex;
   height: 100%;
-  animation: scrolling linear 25s infinite;
+  animation: scrolling linear 45s infinite;
   animation-play-state: running;
   animation-delay: -12s;
   white-space: nowrap;
