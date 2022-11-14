@@ -29,7 +29,6 @@
 
 ## News
 
-- The Perks of Being STRANDED in the Hills
 - Man Forced to Use PUBLIC Bathroom
 - Woman Didn't Know She Was MISSING Both Legs
 - Should Retail Jobs Be Considered a Form of TORTURE?
