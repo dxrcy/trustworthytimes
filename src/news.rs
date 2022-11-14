@@ -311,9 +311,11 @@ fn parse_news(input: &str) -> (String, HashMap<String, String>) {
       // Add tags if token matches
       let maybe_push = match token {
         // Header
-        c if Regex::new(r"^#+$").unwrap().is_match(c) => {
-          Some(format!("<h{d}> {} </h{d}>", escape_html(rest), d = c.len(),))
-        }
+        c if Regex::new(r"^#+$").unwrap().is_match(c) => Some(format!(
+          "<h{d}> {} </h{d}>",
+          escape_html(rest),
+          d = c.len() + 1,
+        )),
 
         // Quote
         ">" => Some(format!("<blockquote> {} </blockquote>", escape_html(rest))),
