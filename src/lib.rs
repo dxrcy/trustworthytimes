@@ -6,7 +6,7 @@ use news::Article;
 use rand::{seq::SliceRandom, thread_rng};
 use unreact::is_dev;
 
-pub const URL: &str = "https://trustworthytimes.github.io";
+pub const URL: &str = "https://dxrcy.dev/trustworthytimes";
 
 /// Compile all articles from `/news` directory
 pub fn get_articles(ignore_test_files: bool) -> Result<Vec<Article>, Box<dyn Error>> {
