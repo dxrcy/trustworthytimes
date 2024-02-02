@@ -45,7 +45,7 @@ pub fn compile_categories(articles: &Vec<Article>) -> (Dict, Dict) {
 
   for article in articles {
     if let Some(author) = &article.author {
-      let mut entry = authors.entry(author).or_insert((0, Vec::new()));
+      let entry = authors.entry(author).or_insert((0, Vec::new()));
       entry.0 += 1;
       entry.1.push(article);
       // let mut entry = authors.entry(author).or_insert(0);
@@ -53,7 +53,7 @@ pub fn compile_categories(articles: &Vec<Article>) -> (Dict, Dict) {
     }
 
     for tag in &article.tags {
-      let mut entry = tags.entry(tag).or_insert((0, Vec::new()));
+      let entry = tags.entry(tag).or_insert((0, Vec::new()));
       entry.0 += 1;
       entry.1.push(article);
     }
